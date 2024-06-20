@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         {children}
-        <Footer /> //Statt des Footers wird auch der Header angezeigt
+        <Footer />
       </body>
     </html>
   );
