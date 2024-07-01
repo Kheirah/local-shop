@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" viewBox="0,0,128,96"> 
+<title>Default Background</title> <desc>Hintergrund zu Beginn</desc>
+<path stroke="blue" fill="pink" d="M 8,8 L 120,8 120,88 8,88 Z"/>
+</svg>
