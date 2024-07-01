@@ -43,8 +43,8 @@ export default function Page({ params }) {
           "Bilder im DOM gefunden"
         );
         console.log("Hintergrund-URL: ", backgroundURL);
-        console.log("Hintergrund-Element: ", backgroundImage.name);
         backgroundImage.src = backgroundURL;
+        console.log("Hintergrund-Element: ", backgroundImage.src);
       }
     } catch (error) {
       console.log("Chunk Load Error! (Whatever that means...)");
