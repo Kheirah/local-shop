@@ -54,7 +54,10 @@ export default function Page({ params }) {
 
   return (
     <>
-      <div className="p-30 bg-green-500 p-20 border-8 border-green-900 text-white bg-default-background">
+      <div
+        className="p-30 bg-green-500 p-20 border-8 border-green-900 text-white bg-default-background"
+        style={{ backgroundImage: `url(${backgroundURL})` }}
+      >
         <Heading>Welcome to {params.shop} shop page!</Heading>
         {loggedIn ? (
           <ul className="flex flex-col">
@@ -69,9 +72,7 @@ export default function Page({ params }) {
                 onChange={handleChange}
               />
             </li>
-            <li>
-              <img src={backgroundURL}></img>
-            </li>
+            <li>{/* <img src={backgroundURL}></img> */}</li>
           </ul>
         ) : (
           <></>
