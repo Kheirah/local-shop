@@ -15,6 +15,10 @@ export default function Page({ params }) {
   const [backgroundElement, setBackgroundElement] = useState("");
   const [fileToUpload, setFileToUpload] = useState(null);
   const [colorSelect, toggleColorSelect] = useState(false);
+  const [showColorPicker, toggleShowColorPicker] = useState({
+    show: false,
+    colorId: 0,
+  });
   const [colors, setColors] = useState(["#C87", "#248"]);
   const [colorComponents, setColorComponents] = useState([
     { red: 12, green: 8, blue: 7 },
@@ -76,6 +80,8 @@ export default function Page({ params }) {
     console.log(response);
   }
 
+  const handleToggleColorPicker = () => {};
+
   return (
     <>
       <div
@@ -108,6 +114,25 @@ export default function Page({ params }) {
               colorReturn={colorReturn}
               visible={toggleColorSelect}
             />
+
+            {showColorPicker ? (
+              <ColorPicker colorId={showColorPicker.colorId} />
+            ) : (
+              <div>
+                <button
+                  onClick={toggleShowColorPicker({ show: true, colorId: 0 })}
+                >
+                  Color 1 Picker
+                </button>
+                <button
+                  onClick={toggleShowColorPicker({ show: true, colorId: 1 })}
+                  colorReturn={colorReturn}
+                  visible={toggleShowColorPicker}
+                >
+                  Color 2 Picker
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           ""
