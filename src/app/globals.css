@@ -31,3 +31,18 @@ body {
     text-wrap: balance;
   }
 }
+
+button {
+  background-color: skyblue;
+  color: white;
+  padding: 3px;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 3px;
+  margin: 6px;
+  /* px-3 md:px-4 py-1 md:py-2 bg-sky-600 border border-sky-600 text-white rounded-lg hover:bg-sky-700 */
+}
+
+button:hover {
+  background-color: deepskyblue;
+}

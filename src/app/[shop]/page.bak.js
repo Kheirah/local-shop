@@ -5,8 +5,6 @@ import CloudinaryImage from "@/components/cloudinary-image";
 import { useState } from "react";
 import { CldImage } from "next-cloudinary";
 import { CldUploadWidget } from "next-cloudinary";
-import ColorPicker from "@/components/colorpicker";
-import ColorSelector from "@/components/colorComponentSelector";
 
 export default function Page({ params }) {
   let loggedIn = true;
@@ -14,19 +12,25 @@ export default function Page({ params }) {
   const [backgroundURL, setBackgroundUrl] = useState("");
   const [backgroundElement, setBackgroundElement] = useState("");
   const [fileToUpload, setFileToUpload] = useState(null);
-  const [colorSelect, toggleColorSelect] = useState(false);
-  const [colors, setColors] = useState(["#C87", "#248"]);
-  const [colorComponents, setColorComponents] = useState([
-    { red: 12, green: 8, blue: 7 },
-    { red: 2, green: 4, blue: 8 },
-  ]);
+
+  function getMetadataForFileList(fileList) {
+    for (const file of fileList) {
+      // Not supported in Safari for iOS.
+      const name = file.name ? file.name : "NOT SUPPORTED";
+      // Not supported in Firefox for Android or Opera for Android.
+      const type = file.type ? file.type : "NOT SUPPORTED";
+      // Unknown cross-browser support.
+      const size = file.size ? file.size : "NOT SUPPORTED";
+      console.log({ file, name, type, size });
+    }
+  }
 
   const handleChange = (event) => {
     const reader = new FileReader();
     // const backgroundImage = new Image();
     try {
       setFileList(event.target.files);
-      // console.log("Metadata of file list:");
+      console.log("Metadata of file list:");
       //   getMetadataForFileList(fileList);
       const file = event.target.files[0];
       if (file) {
@@ -52,16 +56,6 @@ export default function Page({ params }) {
     }
   };
 
-  const colorReturn = (colorId, components, hexValue) => {
-    const newColors = JSON.parse(JSON.stringify(colors));
-    const newColorComponents = JSON.parse(JSON.stringify(colorComponents));
-    // prevColors[i] = item;
-    newColors[colorId] = hexValue;
-    newColorComponents[colorId] = components;
-    setColors(newColors);
-    setColorComponents(newColorComponents);
-  };
-
   async function sendImage() {
     const formData = new FormData();
     formData.append("file", fileToUpload);
@@ -83,35 +77,7 @@ export default function Page({ params }) {
         style={{ backgroundImage: `url(${backgroundURL})` }}
       >
         <Heading>Welcome to {params.shop} shop page!</Heading>
-        <button onClick={toggleColorSelect(true)}>Select Website Colors</button>
-        {colorSelect ? (
-          <div>
-            {/* <ColorPicker
-            // style={{
-            //   display: "flex",
-            //   flexWrap: "wrap",
-            //   position: "sticky",
-            //   zIndex: "10",
-            // }}
-            colorReturn={colorReturn}
-            // color={0}
-          /> */}
-            <ColorSelector
-              value={colorComponents}
-              colorId={0}
-              colorReturn={colorReturn}
-              visible={toggleColorSelect}
-            />
-            <ColorSelector
-              value={colorComponents}
-              colorId={1}
-              colorReturn={colorReturn}
-              visible={toggleColorSelect}
-            />
-          </div>
-        ) : (
-          ""
-        )}
+        <button>Test button</button>
         {loggedIn ? (
           <ul className="flex flex-col">
             <li>
@@ -129,6 +95,19 @@ export default function Page({ params }) {
             <li>
               <button onClick={sendImage}>übernehmen</button>
             </li>
+            <li>{/* <CloudinaryImage /> */}</li>
+            {/* <CldUploadWidget uploadPreset="ml_default">
+              {({ open }) => {
+                return (
+                  <button
+                    className="bg-indigo-500 rounded py-2 px-4 mb-4 text-white"
+                    onClick={() => open()}
+                  >
+                    Upload an Image
+                  </button>
+                );
+              }}
+            </CldUploadWidget> */}
           </ul>
         ) : (
           <></>
