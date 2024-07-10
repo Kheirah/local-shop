@@ -80,8 +80,6 @@ export default function Page({ params }) {
     console.log(response);
   }
 
-  const handleToggleColorPicker = () => {};
-
   return (
     <>
       <div
@@ -92,16 +90,6 @@ export default function Page({ params }) {
         <button onClick={toggleColorSelect(true)}>Select Website Colors</button>
         {colorSelect ? (
           <div>
-            {/* <ColorPicker
-            // style={{
-            //   display: "flex",
-            //   flexWrap: "wrap",
-            //   position: "sticky",
-            //   zIndex: "10",
-            // }}
-            colorReturn={colorReturn}
-            // color={0}
-          /> */}
             <ColorSelector
               value={colorComponents}
               colorId={0}
@@ -114,7 +102,6 @@ export default function Page({ params }) {
               colorReturn={colorReturn}
               visible={toggleColorSelect}
             />
-
             {showColorPicker ? (
               <ColorPicker colorId={showColorPicker.colorId} />
             ) : (
