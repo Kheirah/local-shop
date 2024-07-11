@@ -5,6 +5,7 @@ export default function ColorComponentSelector({ label, value, valueReturn }) {
 
   const handleChange = (e) => {
     setNewValue(e.target.value);
+    console.log(typeof valueReturn);
     valueReturn(label, newValue);
   };
   return (

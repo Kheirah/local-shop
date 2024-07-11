@@ -58,17 +58,24 @@ export default function Page({ params }) {
   };
 
   const colorReturn = (colorId, components, hexValue) => {
-    const newColors = JSON.parse(JSON.stringify(colors));
+    const newColors = colors.map((color) => color);
     const newColorComponents = JSON.parse(JSON.stringify(colorComponents));
     // prevColors[i] = item;
     newColors[colorId] = hexValue;
     newColorComponents[colorId] = components;
     setColors(newColors);
     setColorComponents(newColorComponents);
+    console.log("Colors set to  ", colors);
+    console.log(
+      "Color components set to  ",
+      colorComponents[0],
+      colorComponents[1]
+    );
   };
 
   const button0function = () => {
-    setShowColorSelect(true);
+    const visible = showColorSelect;
+    setShowColorSelect(!visible);
   };
 
   const button1function = () => {
@@ -121,9 +128,19 @@ export default function Page({ params }) {
                 visible={setShowColorPicker}
               />
             ) : (
-              <div>
-                <button onClick={button1function}>Color 1 Picker</button>
-                <button onClick={button2function}>Color 2 Picker</button>
+              <div
+                style={{
+                  borderWidth: "8px",
+                  borderColor: colors[0],
+                  backgroundColor: colors[1],
+                }}
+              >
+                <button style={{}} onClick={button1function}>
+                  Color 1 Picker
+                </button>
+                <button style={{}} onClick={button2function}>
+                  Color 2 Picker
+                </button>
               </div>
             )}
           </div>
