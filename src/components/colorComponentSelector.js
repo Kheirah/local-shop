@@ -16,7 +16,7 @@ export default function ColorComponentSelector({ label, value, valueReturn }) {
         min="0"
         max="15"
         value={newValue}
-        onChange={(event) => handleChange(event)}
+        onChange={handleChange}
       ></input>
     </div>
   );

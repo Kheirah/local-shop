@@ -5,12 +5,12 @@ export default function ColorPicker({ colorId, colorReturn, visible }) {
   let hex = "";
 
   for (let r = 0; r < 16; r++) {
-    value[red] = r;
+    value.red = r;
     for (let g = 0; g < 16; g++) {
-      value[green] = g;
+      value.green = g;
       for (let b = 0; b < 16; b++) {
-        value[blue] = b;
-        for (let i in [red, green, blue]) {
+        value.blue = b;
+        for (let i in ["red", "green", "blue"]) {
           switch (value[i]) {
             case 10:
               hex = "A";

@@ -14,8 +14,9 @@ export default function Page({ params }) {
   const [backgroundURL, setBackgroundUrl] = useState("");
   const [backgroundElement, setBackgroundElement] = useState("");
   const [fileToUpload, setFileToUpload] = useState(null);
-  const [colorSelect, toggleColorSelect] = useState(false);
-  const [showColorPicker, toggleShowColorPicker] = useState({
+  const [showColorSelect, setShowColorSelect] = useState(false);
+  const [colorId, setColorId] = useState(0);
+  const [showColorPicker, setShowColorPicker] = useState({
     show: false,
     colorId: 0,
   });
@@ -66,6 +67,17 @@ export default function Page({ params }) {
     setColorComponents(newColorComponents);
   };
 
+  const button0function = () => {
+    setShowColorSelect(true);
+  };
+
+  const button1function = () => {
+    setShowColorPicker({ show: true, colorId: 0 });
+  };
+  const button2function = () => {
+    setShowColorPicker({ show: true, colorId: 1 });
+  };
+
   async function sendImage() {
     const formData = new FormData();
     formData.append("file", fileToUpload);
@@ -87,37 +99,31 @@ export default function Page({ params }) {
         style={{ backgroundImage: `url(${backgroundURL})` }}
       >
         <Heading>Welcome to {params.shop} shop page!</Heading>
-        <button onClick={toggleColorSelect(true)}>Select Website Colors</button>
-        {colorSelect ? (
+        <button onClick={button0function}>Select Website Colors</button>
+        {showColorSelect ? (
           <div>
             <ColorSelector
               value={colorComponents}
               colorId={0}
               colorReturn={colorReturn}
-              visible={toggleColorSelect}
+              visible={setShowColorSelect}
             />
             <ColorSelector
               value={colorComponents}
               colorId={1}
               colorReturn={colorReturn}
-              visible={toggleColorSelect}
+              visible={setShowColorSelect}
             />
-            {showColorPicker ? (
-              <ColorPicker colorId={showColorPicker.colorId} />
+            {showColorPicker.show ? (
+              <ColorPicker
+                colorId={showColorPicker.colorId}
+                colorReturn={colorReturn}
+                visible={setShowColorPicker}
+              />
             ) : (
               <div>
-                <button
-                  onClick={toggleShowColorPicker({ show: true, colorId: 0 })}
-                >
-                  Color 1 Picker
-                </button>
-                <button
-                  onClick={toggleShowColorPicker({ show: true, colorId: 1 })}
-                  colorReturn={colorReturn}
-                  visible={toggleShowColorPicker}
-                >
-                  Color 2 Picker
-                </button>
+                <button onClick={button1function}>Color 1 Picker</button>
+                <button onClick={button2function}>Color 2 Picker</button>
               </div>
             )}
           </div>
