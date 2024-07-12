@@ -1,9 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-// const MONGODB_URI = process.env.MONGODB_URI;
-const MONGODB_URI = "mongodb://localhost:27017/LokalShop";
-
-console.log(MONGODB_URI);
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   throw new Error(
@@ -17,7 +14,7 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
-async function dbConnect() {
+export default async function dbConnect() {
   if (cached.conn) {
     return cached.conn;
   }
@@ -35,5 +32,3 @@ async function dbConnect() {
   }
   return cached.conn;
 }
-
-module.exports = dbConnect;
