@@ -1,4 +1,5 @@
 import { getProducts } from "@/services/products_service";
+import DeleteButton from "./remove-product";
 
 export default async function Products() {
   const products = await getProducts();
@@ -17,6 +18,7 @@ export default async function Products() {
           <p>New: {product.new ? "Yes" : "No"}</p>
           <p>Hint: {product.hint}</p>
           <p>Active: {product.isActive ? "Yes" : "No"}</p> */}
+          <DeleteButton id={product._id.toString()} />
         </div>
       ))}
     </>

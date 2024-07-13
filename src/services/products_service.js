@@ -18,3 +18,9 @@ export async function createProduct(productData) {
   const product = await Product.create(productData);
   return product;
 }
+
+export async function deleteProduct(id) {
+  await dbConnect();
+  const product = await Product.findByIdAndDelete(id);
+  return product;
+}
