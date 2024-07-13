@@ -24,3 +24,11 @@ export async function createShop(shopData) {
   const shop = await Shop.create(shopData);
   return shop;
 }
+
+export async function updateShop(urlName, shopData) {
+  await dbConnect();
+  const shop = await Shop.findOneAndUpdate({ urlName }, shopData, {
+    new: true,
+  });
+  return shop;
+}

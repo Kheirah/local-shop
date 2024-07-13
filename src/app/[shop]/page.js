@@ -12,5 +12,5 @@ export default async function Page({ params }) {
     );
   }
 
-  return <Settings shop={params.shop} />;
+  return <Settings shopName={found.shopName} shopUrl={found.urlName} />;
 }

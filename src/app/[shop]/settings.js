@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Heading from "@/components/heading";
 import CloudinaryImage from "@/components/cloudinary-image";
 import { useState } from "react";
@@ -8,7 +9,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import ColorPicker from "@/components/colorpicker";
 import ColorSelector from "@/components/colorComponentSelector";
 
-export default function Settings({ shop }) {
+export default function Settings({ shopName, shopUrl }) {
   let loggedIn = true;
   const [fileList, setFileList] = useState(null);
   const [backgroundURL, setBackgroundUrl] = useState("");
@@ -25,6 +26,7 @@ export default function Settings({ shop }) {
     { red: 12, green: 8, blue: 7 },
     { red: 2, green: 4, blue: 8 },
   ]);
+  const router = useRouter();
 
   const handleChange = (event) => {
     const reader = new FileReader();
@@ -99,12 +101,41 @@ export default function Settings({ shop }) {
     console.log(response);
   }
 
+  async function handleChangeShopName(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const response = await fetch("/api/register-shop", {
+      method: "PUT",
+      body: formData,
+    });
+    const message = await response.text();
+    if (message === "success") {
+      alert("Shop name changed successfully");
+      event.target.reset();
+      router.refresh();
+    } else {
+      alert("Failed to change shop name");
+    }
+  }
+
   return (
     <div
       className="p-30 bg-green-500 p-20 border-8 border-green-900 text-white bg-default-background"
       style={{ backgroundImage: `url(${backgroundURL})` }}
     >
-      <Heading>Welcome to {shop} shop page!</Heading>
+      <Heading>Welcome to {shopName} shop page!</Heading>
+      <form className="text-black" onSubmit={handleChangeShopName}>
+        <label htmlFor="shopName">Shop Name:</label>
+        <input
+          id="shopName"
+          type="text"
+          name="shopName"
+          placeholder="Shop Name"
+        />
+        <input type="hidden" name="shopUrl" value={shopUrl} />
+        <button type="submit">Change Shop Name</button>
+      </form>
+
       <button onClick={button0function}>Select Website Colors</button>
       {showColorSelect ? (
         <div>
